@@ -1,0 +1,79 @@
+﻿@model PWChange2.Models.User
+@{
+    ViewData["Title"] = "Change Password";
+}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<div>
+    <form asp-action="ChangePW" method="post">
+        <div class="form-horizontal">
+            <h4>Change Your Password</h4>
+            @if (ViewData["Pass"].ToString().Length > 0)
+            {
+                <label class="text-success" color="green">@ViewData["Pass"]</label>
+
+            }
+            else
+            {
+                if (ViewData["ExceptionMessage"].ToString().Length > 0)
+                {
+                    <label class="text-danger">@ViewData["ExceptionMessage"]</label>
+                }
+
+            }
+            
+
+
+
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentPassword" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="CurrentPassword" class="form-control" />
+                    <span asp-validation-for="CurrentPassword" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewPassword" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="NewPassword" class="form-control" />
+                    <span asp-validation-for="NewPassword" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <div class="g-recaptcha" data-sitekey="Public Key"></div> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-3">
+                    <button type="submit" value="ChangePW" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+</div>
